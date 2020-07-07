@@ -32,10 +32,10 @@
             <h2 class="fs-title">Select Cat/Dog</h2>
             <div class="radio-toolbar">
                 <input type="radio" id="cat" name="petType" value="cat">
-                <label for="cat">Cat</label>
+                <label for="cat" сlass="next">Cat</label>
 
-                <input type="radio" id="dog" name="petType" value="dog">
-                <label for="dog">Dog</label>
+                <input type="radio" id="dog" name="petType" value="dog" >
+                <label for="dog" сlass="next">Dog</label>
             </div>
         </div>
 
@@ -47,10 +47,10 @@
         <div class="content-wrapper">
             <h2 class="fs-title">Select Adult/Puppy</h2>
             <div class="radio-toolbar">
-                <input type="radio" id="adult" name="age" value="adult">
+                <input type="radio" id="adult" name="age" value="adult" сlass="next">
                 <label for="adult">Adult</label>
 
-                <input type="radio" id="puppy" name="age" value="puppy">
+                <input type="radio" id="puppy" name="age" value="puppy" сlass="next">
                 <label for="puppy">Puppy</label>
             </div>
         </div>
@@ -91,19 +91,13 @@
         </div>
 
         <input type="button" name="previous" class="previous action-button" value="Previous" />
-        <input type="submit" name="submit" class="submit submit-btn action-button" value="Submit" />
+        <input type="button" name="next" class="next action-button sms-btn" value="Send sms" />
     </fieldset>
 
     <fieldset>
         <div class="content-wrapper">
-            <h2 class="fs-title">Phone Number</h2>
-            <input type="text" id="phone" name="phone"
-                   placeholder="380XXXXXXXXX"/>
-            <span id="spnPhoneStatus"></span>
-
-            <h2 class="fs-title">Phone Number</h2>
-            <input type="text" id="phone" name="phone"
-                   placeholder="380XXXXXXXXX"/>
+            <h2 class="fs-title">Sms code</h2>
+            <input type="text" id="sms" name="sms"/>
         </div>
 
         <input type="button" name="previous" class="previous action-button" value="Previous" />

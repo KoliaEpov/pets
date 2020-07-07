@@ -211,6 +211,6 @@ body {
     width: 100% !important;
 }
 
-input[type="submit"]:disabled {
+input.sms-btn:disabled {
     background: #ccc!important;
 }

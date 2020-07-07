@@ -4,14 +4,13 @@ var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
-console.log('next');
-
 $(".next").click(function(){
     console.log('next');
     if(animating) return false;
     animating = true;
 
     current_fs = $(this).parent();
+    console.log('current_fs', current_fs);
     next_fs = $(this).parent().next();
 
     //activate next step on progressbar using the index of next_fs
@@ -47,7 +46,6 @@ $(".next").click(function(){
 
 $(".registered").click(function(){
 
-    console.log('test');
     if(animating) return false;
     animating = true;
 
@@ -121,6 +119,48 @@ $(".previous").click(function(){
     });
 });
 
+$('input[type="radio"]').bind('change', function (v) {
+
+    if($(this).is(':checked')) {
+        console.log('next');
+        if(animating) return false;
+        animating = true;
+
+        current_fs = $(this).closest("fieldset");
+        next_fs = $(this).closest("fieldset").next();
+
+        //activate next step on progressbar using the index of next_fs
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+        //show the next fieldset
+        next_fs.show();
+        //hide the current fieldset with style
+        current_fs.animate({opacity: 0}, {
+            step: function(now, mx) {
+                //as the opacity of current_fs reduces to 0 - stored in "now"
+                //1. scale current_fs down to 80%
+                scale = 1 - (1 - now) * 0.2;
+                //2. bring next_fs from the right(50%)
+                left = (now * 50)+"%";
+                //3. increase opacity of next_fs to 1 as it moves in
+                opacity = 1 - now;
+                current_fs.css({
+                    'transform': 'scale('+scale+')',
+                    'position': 'absolute'
+                });
+                next_fs.css({'left': left, 'opacity': opacity});
+            },
+            duration: 800,
+            complete: function(){
+                current_fs.hide();
+                animating = false;
+            },
+            //this comes from the custom easing plugin
+            easing: 'easeInOutBack'
+        });
+    }
+});
+
 $(".submit-btn").click(function(){
     // const url = 'url'
     //
@@ -148,7 +188,7 @@ $(document).ready(function() {
     let quantityValue;
     let weightValue;
 
-    $(".submit").prop('disabled', true);
+    $(".sms-btn").prop('disabled', true);
 
     var data = [
         {
@@ -264,10 +304,10 @@ function validatePhone(txtPhone) {
 
     var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
     if (filter.test(a)) {
-        $(".submit").prop('disabled', false);
+        $(".sms-btn").prop('disabled', false);
         return true;
     } else {
-        $(".submit").prop('disabled', true);
+        $(".sms-btn").prop('disabled', true);
         return false;
     }
 }
